@@ -1,106 +1,97 @@
 import React from 'react'
-import Data from '../data.json'
 import RangeControl from './RangeControl'
-
+import { useSelector, useDispatch } from 'react-redux'
 const SideBar = () => {
+  const { text } = useSelector(state => state.search)
+  const range = useSelector(state => state.range.value)
+  const filter = useSelector(state => state.filter)
+  const dispatch = useDispatch()
+  const value = useSelector(state => state.data)
+  const Data = useSelector(state => {
+    switch (filter) {
+      case 'Butterfly': {
+        return state.data.Butterfly.map(item => item)
+      }
+      case 'Cars': {
+        return state.data.Cars.map(item => item)
+      }
+      case 'Cellphone': {
+        return state.data.Cellphone.map(item => item)
+      }
+      case 'Office': {
+        return state.data.Office.map(item => item)
+      }
+      default: {
+        return state.data
+      }
+    }
+  })
+
+  // let search = value.Cars.filter(item => item.text.toLowerCase().includes(text))
+  // console.log(search)
   return (
     <div className='container'>
       <aside className='container__sidebar'>
         <nav>
           <ul>
-            <li>ButterFly</li>
-            <li>Cars</li>
-            <li>Cellphones</li>
-            <li>Office</li>
+            <li
+              onClick={() => {
+                dispatch({
+                  type: 'SET_FILTER',
+                  payload: 'Butterfly'
+                })
+              }}
+            >
+              ButterFly
+            </li>
+            <li
+              onClick={() => {
+                dispatch({
+                  type: 'SET_FILTER',
+                  payload: 'Cars'
+                })
+              }}
+            >
+              Cars
+            </li>
+            <li
+              onClick={() => {
+                dispatch({
+                  type: 'SET_FILTER',
+                  payload: 'Cellphone'
+                })
+              }}
+            >
+              Cellphones
+            </li>
+            <li
+              onClick={() => {
+                dispatch({
+                  type: 'SET_FILTER',
+                  payload: 'Office'
+                })
+              }}
+            >
+              Office
+            </li>
           </ul>
         </nav>
         <RangeControl />
       </aside>
 
       <div className='container__main'>
-        {Data.Butterfly.map(item => (
-          <div>
+        {Data.map((item, index) => (
+          <div key={index}>
             <img
+              style={{ opacity: range }}
               alt='img'
               className='ml-30 mt-20'
-              src={item.image}
-              width={350}
-              height={300}
+              src={item?.image}
+              width={450}
             />
             <h3 style={{ textAlign: 'center' }}>{item.text}</h3>
           </div>
         ))}
-        {/* <div>
-            <img
-              alt='img'
-              className='ml-30 mt-20'
-              src={item.image}
-              width={350}
-              height={300}
-            />
-            <h3 style={{ textAlign: 'center' }}>{item.text}</h3>
-          </div> */}
-        {/* <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        />
-
-        <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        />
-
-        <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        />
-        <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        />
-
-        <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        />
-
-        <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        />
-
-        <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        />
-        <img
-          alt='img'
-          className='ml-30 mt-20'
-          src='https://media.istockphoto.com/photos/hot-air-balloons-flying-over-the-botan-canyon-in-turkey-picture-id1297349747?b=1&k=20&m=1297349747&s=170667a&w=0&h=oH31fJty_4xWl_JQ4OIQWZKP8C6ji9Mz7L4XmEnbqRU='
-          width={350}
-          height={300}
-        /> */}
       </div>
     </div>
   )
