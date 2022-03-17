@@ -1,4 +1,4 @@
-export const rangeValue = (state = { value: 0.1 }, action) => {
+export const rangeValue = (state = { value: 0.2 }, action) => {
   switch (action.type) {
     case 'RANGE_VALUE_UPDATE':
       return {

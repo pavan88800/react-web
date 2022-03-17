@@ -4,3 +4,10 @@ export const searchAction = value => async (dispatch, getState) => {
     payload: value
   })
 }
+
+export const FetchData = value => async (dispatch, getState) => {
+  dispatch({
+    type: 'DISPLAY_DATA',
+    payload: value
+  })
+}

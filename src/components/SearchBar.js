@@ -1,16 +1,17 @@
 import React from 'react'
-import { searchAction } from '../redux/actions/searchAction'
+import { FetchData, searchAction } from '../redux/actions/searchAction'
 import { useSelector, useDispatch } from 'react-redux'
+import data from '../data'
 const SearchBar = () => {
   const { text } = useSelector(state => state.search)
 
-  console.log(text, 'text')
   const dispatch = useDispatch()
 
   const handleSearch = e => {
     e.preventDefault()
     dispatch(searchAction(e.target.value))
   }
+  dispatch(FetchData(data))
   return (
     <div
       style={{

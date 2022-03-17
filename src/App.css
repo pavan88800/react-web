@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  font-family: 'Poppins';
 }
 
 .mt-5 {
@@ -62,8 +63,8 @@
 }
 
 .container__sidebar {
-  width: 18%;
-  border-right: 4px solid #000;
+  width: 8%;
+  border-right: 1px solid #000;
   height: auto;
 }
 
@@ -74,11 +75,20 @@
   overflow: auto;
 }
 
-ul {
-  text-align: left;
-}
 li {
+  margin-left: -150px;
   list-style-type: none;
-  padding: 20px;
   cursor: pointer;
+  padding: 15px;
+}
+.active-filter {
+  color: blueviolet;
+}
+
+input[type='range'][orient='vertical'] {
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* Chromium */
+  width: 8px;
+  height: 175px;
+  padding: 0 5px;
 }
