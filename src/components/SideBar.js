@@ -1,12 +1,26 @@
 import React from 'react'
 import RangeControl from './RangeControl'
 import { useSelector, useDispatch } from 'react-redux'
+import List from './List'
 const SideBar = () => {
   const { text } = useSelector(state => state.search)
-  const range = useSelector(state => state.range.value)
   const filter = useSelector(state => state.filter)
   const dispatch = useDispatch()
   const value = useSelector(state => state)
+
+  const product = () => {
+    let data = value.data.Data
+    if (text) {
+      data = data.map(item =>
+        item.images.filter(el =>
+          el.text.toLowerCase().includes(text.toLowerCase())
+        )
+      )
+    }
+    return data
+  }
+
+  let ListData = product().flat(3)
 
   return (
     <div className='container'>
@@ -44,27 +58,13 @@ const SideBar = () => {
               <span className='sr-only'>Loading...</span>
             </div>
           )}
+          {/* filter Data */}
+          {text && ListData.map((item, i) => <List item={item} key={i} />)}
           {/* display the Data  */}
-          {value.data.Data.map(
+          {product().map(
             item =>
               item.category === filter &&
-              item.images.map((item, i) => (
-                <div className='col-md-4' key={i}>
-                  <div className='card mt-3 mb-2' style={{ width: '17rem' }}>
-                    <img
-                      src={item?.image}
-                      className='card-img-top'
-                      alt={item?.text}
-                      style={{ opacity: range }}
-                    />
-                    <div className='card-body'>
-                      <p className='text-lowercase text-center '>
-                        {item?.text}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))
+              item.images.map((item, i) => <List item={item} key={i} />)
           )}
         </div>
       </div>

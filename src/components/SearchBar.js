@@ -4,9 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import data from '../data'
 const SearchBar = () => {
   const { text } = useSelector(state => state.search)
-
   const dispatch = useDispatch()
-
   const handleSearch = e => {
     e.preventDefault()
     dispatch(searchAction(e.target.value))
