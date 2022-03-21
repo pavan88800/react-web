@@ -4,24 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import List from './List'
 const SideBar = () => {
   const { text } = useSelector(state => state.search)
-  const filter = useSelector(state => state.filter)
+  const filters = useSelector(state => state.filter)
   const dispatch = useDispatch()
   const value = useSelector(state => state)
-
-  const product = () => {
-    let data = value.data.Data
-    if (text) {
-      data = data.map(item =>
-        item.images.filter(el =>
-          el.text.toLowerCase().includes(text.toLowerCase())
-        )
-      )
-    }
-    return data
-  }
-
-  let ListData = product().flat(3)
-
+  let { Data, filter } = value.data
   return (
     <div className='container'>
       <aside className='container__sidebar'>
@@ -36,7 +22,7 @@ const SideBar = () => {
                     payload: item.category
                   })
                 }}
-                className={filter === item.category ? 'active-filter' : ''}
+                className={filters === item.category ? 'active-filter' : ''}
               >
                 {item.category}
               </li>
@@ -58,14 +44,13 @@ const SideBar = () => {
               <span className='sr-only'>Loading...</span>
             </div>
           )}
-          {/* filter Data */}
-          {text && ListData.map((item, i) => <List item={item} key={i} />)}
-          {/* display the Data  */}
-          {product().map(
-            item =>
-              item.category === filter &&
-              item.images.map((item, i) => <List item={item} key={i} />)
-          )}
+          {text
+            ? filter.flat(3).map((item, i) => <List item={item} key={i} />)
+            : Data.map(
+                item =>
+                  item.category === filters &&
+                  item.images.map((item, i) => <List item={item} key={i} />)
+              )}
         </div>
       </div>
     </div>

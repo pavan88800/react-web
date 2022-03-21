@@ -1,5 +1,5 @@
 import React from 'react'
-import { FetchData, searchAction } from '../redux/actions/searchAction'
+import { fetchData, searchAction } from '../redux/actions/searchAction'
 import { useSelector, useDispatch } from 'react-redux'
 import data from '../data'
 const SearchBar = () => {
@@ -9,7 +9,7 @@ const SearchBar = () => {
     e.preventDefault()
     dispatch(searchAction(e.target.value))
   }
-  dispatch(FetchData(data))
+  dispatch(fetchData(data))
   return (
     <div
       style={{

@@ -1,6 +1,6 @@
 export const searchReducer = (state = { text: '' }, action) => {
   switch (action.type) {
-    case 'SEARCH':
+    case 'FILTER_DATA':
       return {
         ...state,
         text: action.payload
