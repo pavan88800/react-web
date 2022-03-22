@@ -12,7 +12,7 @@ function App () {
   const search = useSelector(state => state.search.text)
   const categories = useSelector(state => state.data.categories)
   const filter = useSelector(state => state.data.filter)
-  let filterData = filter.flat(3)
+
   useEffect(() => {
     dispatch(fetchApiData())
   }, [dispatch])
@@ -31,7 +31,7 @@ function App () {
             search={search}
             activeTab={activeTab}
             categories={categories}
-            filter={filterData}
+            filter={filter}
           />
         </div>
       )}

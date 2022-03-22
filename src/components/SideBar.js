@@ -3,7 +3,7 @@ import RangeControl from './RangeControl'
 import { useDispatch } from 'react-redux'
 import { setActiveTab } from '../redux/dataReducer'
 import List from './List'
-
+import { flattenDeep } from 'lodash'
 const SideBar = ({ data, search, activeTab, categories, filter }) => {
   const dispatch = useDispatch()
   return (
@@ -30,7 +30,7 @@ const SideBar = ({ data, search, activeTab, categories, filter }) => {
       <div className='container ml-5 container__main'>
         <div className='row'>
           {search
-            ? filter.map((item, i) => <List item={item} key={i} />)
+            ? flattenDeep(filter).map((item, i) => <List item={item} key={i} />)
             : data.map(
                 item =>
                   item.category === activeTab &&
