@@ -1,21 +1,14 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import thunk from 'redux-thunk'
-import { rangeValue } from './rangeReducer'
-import { filterReducer } from './filterReducer'
-import { DataReducer } from './dataReducer'
-import { searchReducer } from './searchReducer'
-const middleware = [thunk]
+import { configureStore } from '@reduxjs/toolkit'
+import rangeValueSlice from './rangeReducer'
+import DataReducer from './dataReducer'
+import searchSlice from './searchReducer'
 
-const reducer = combineReducers({
-  range: rangeValue,
-  filter: filterReducer,
-  data: DataReducer,
-  search: searchReducer
+const store = configureStore({
+  reducer: {
+    range: rangeValueSlice,
+    data: DataReducer,
+    search: searchSlice
+  }
 })
-const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(...middleware))
-)
 
 export default store

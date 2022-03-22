@@ -1,25 +1,19 @@
-import React from 'react'
-import { fetchData, searchAction } from '../redux/actions/searchAction'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import data from '../data'
+import { searchText } from '../redux/searchReducer'
+import { setFilter } from '../redux/dataReducer'
 const SearchBar = () => {
   const { text } = useSelector(state => state.search)
   const dispatch = useDispatch()
   const handleSearch = e => {
     e.preventDefault()
-    dispatch(searchAction(e.target.value))
+    dispatch(searchText(e.target.value))
   }
-  dispatch(fetchData(data))
+  useEffect(() => {
+    dispatch(setFilter(text))
+  }, [dispatch, text])
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        border: '3px solid #000',
-        padding: '20px',
-        paddingTop: '20px'
-      }}
-    >
+    <div className='search-bar'>
       <input
         type='text'
         placeholder='Search '

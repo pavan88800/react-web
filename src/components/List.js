@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 const List = ({ item }) => {
-  const range = useSelector(state => state.range.value)
+  const range = useSelector(state => state.range.Opacity)
   return (
     <div className='col-md-4'>
       <div className='card mt-3 mb-2' style={{ width: '17rem' }}>
